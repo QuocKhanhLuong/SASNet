@@ -1,0 +1,5 @@
+{
+  "base": "../acdc_10.json",
+  "name": "acdc_10_A2_no_slicealign",
+  "model": {"align": false}, "train": {"shift_aux": {"weight": 0.0}}
+}

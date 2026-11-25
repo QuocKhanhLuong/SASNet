@@ -1,0 +1,37 @@
+{
+  "seed": 42,
+  "model": {
+    "channels": [24, 48, 96, 160, 192],
+    "align": true,
+    "ssm_blocks": [1, 2],
+    "state": 8,
+    "spacing_mode": "physical",
+    "spacing_ref_mm": 10.0
+  },
+  "distill": {
+    "updates": 10000,
+    "updates_per_epoch": 80,
+    "lr": 0.0003,
+    "weight_decay": 0.0001,
+    "holdout_fraction": 0.1,
+    "hf_repo": "mathpluscode/CineMA",
+    "hf_revision": "b1251ee50423bceeca84c080782fc3bc7756dea6"
+  },
+  "train": {
+    "updates": 12000,
+    "updates_per_epoch": 80,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "warmup_fraction": 0.05,
+    "grad_clip": 1.0,
+    "lambda_u_max": 1.0,
+    "lambda_u_warmup": 800,
+    "lambda_u_ramp_fraction": 0.1,
+    "tau": 0.95,
+    "stream_weights": [0.25, 0.25, 0.5],
+    "fp_dropout": 0.5,
+    "cutmix_area": [0.25, 0.5],
+    "cutmix_align_px": 16,
+    "shift_aux": {"weight": 0.1, "max_px": 8, "start_update": 0}
+  }
+}

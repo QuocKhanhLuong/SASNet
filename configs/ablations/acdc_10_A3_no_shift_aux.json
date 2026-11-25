@@ -1,0 +1,5 @@
+{
+  "base": "../acdc_10.json",
+  "name": "acdc_10_A3_no_shift_aux",
+  "train": {"shift_aux": {"weight": 0.0}}
+}

@@ -1,0 +1,5 @@
+{
+  "base": "../acdc_10.json",
+  "name": "acdc_10_A1_no_physical_step",
+  "model": {"spacing_mode": "none"}
+}

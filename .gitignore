@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Data, checkpoints and runs
+data/
+preprocessed_data/
+runs/
+weights/
+*.pt
+*.pth
+
+# OS / editors
+.DS_Store
+.vscode/
+.idea/

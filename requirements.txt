@@ -1,0 +1,16 @@
+# PyTorch: install the build for your CUDA version from pytorch.org (tested: torch 2.14.1, CUDA 13.2)
+torch>=2.1
+
+numpy>=1.24,<2.3
+scipy>=1.11
+nibabel>=5.0
+pynrrd>=1.0
+medpy==0.5.2
+pyyaml>=6.0
+
+# Stage S1 (CineMA distillation); the official CineMA package is installed from GitHub (see README)
+huggingface_hub>=0.20
+safetensors>=0.4
+omegaconf>=2.3
+
+pytest

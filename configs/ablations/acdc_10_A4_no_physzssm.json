@@ -1,0 +1,5 @@
+{
+  "base": "../acdc_10.json",
+  "name": "acdc_10_A4_no_physzssm",
+  "model": {"ssm_blocks": [0, 0]}
+}

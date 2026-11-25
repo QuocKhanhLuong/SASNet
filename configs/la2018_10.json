@@ -1,0 +1,5 @@
+{
+  "base": "base.json",
+  "name": "la2018_10",
+  "data": {"prepared": "preprocessed_data/la2018", "split": "splits/la2018_10.json", "single_class": true}
+}

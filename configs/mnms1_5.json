@@ -1,0 +1,5 @@
+{
+  "base": "base.json",
+  "name": "mnms1_5",
+  "data": {"prepared": "preprocessed_data/mnms1", "split": "splits/mnms1_5.json", "single_class": false}
+}

@@ -1,0 +1,5 @@
+{
+  "base": "../acdc_10.json",
+  "name": "acdc_10_A5_inplane_only",
+  "model": {"align": false, "ssm_blocks": [0, 0]}, "train": {"shift_aux": {"weight": 0.0}}
+}

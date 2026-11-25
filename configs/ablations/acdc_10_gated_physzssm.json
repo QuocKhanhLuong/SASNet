@@ -1,0 +1,5 @@
+{
+  "base": "../acdc_10.json",
+  "name": "acdc_10_gated_physzssm",
+  "model": {"zgate": {"mode": "token", "bias": 2.0}}
+}

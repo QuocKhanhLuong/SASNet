@@ -1,0 +1,5 @@
+{
+  "base": "base.json",
+  "name": "acdc_5",
+  "data": {"prepared": "preprocessed_data/acdc", "split": "splits/acdc_5.json", "single_class": false}
+}
