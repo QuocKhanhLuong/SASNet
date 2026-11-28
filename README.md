@@ -91,7 +91,6 @@ Each split file in `splits/` lists the labelled, unlabelled, validation and test
 | Split | Labelled / Unlabelled / Val / Test (patients) | Notes |
 |-------|-----------------------------------------------|-------|
 | `acdc_10`, `acdc_5` | 7 / 63 / 10 / 20 and 3 / 67 / 10 / 20 | SSL4MIS ACDC split, 10 % and 5 % labels; ED + ES frames |
-| `mnms1_10`, `mnms1_5` | 15 / 135 / 34 / 136 and 7 / 143 / 34 / 136 | official split (Training-Labeled / Validation / Testing) |
 | `la2018_10`, `la2018_5` | 7 / 63 / 10 / 20 and 3 / 67 / 10 / 20 | UA-MT test list; 10 training cases held out for validation |
 
 Unlabelled patients are always loaded without their masks.
@@ -104,7 +103,6 @@ Datasets must be downloaded, unzipped and placed in `data/`:
 SASNet/
 ├── data/
 │   ├── ACDC/database/training/         patient001 ... patient100
-│   ├── MnM1/                           Training/Labeled, Validation, Testing, <info>.csv
 │   └── LA2018/Training Set/            100 case folders (lgemri.nrrd, laendo.nrrd)
 │
 ├── preprocessed_data/                  written by scripts/preprocess_*.py
@@ -118,7 +116,7 @@ SASNet/
 ### Preprocessing
 
 Raw volumes are converted to `.npy` arrays plus a `dataset.json` with each patient's shape and spacing.
-- **ACDC and M&Ms-1:** only the ED and ES frames are kept, and intensities are scaled by the 0.5/99.5 percentiles of the
+- **ACDC:** only the ED and ES frames are kept, and intensities are scaled by the 0.5/99.5 percentiles of the
   whole cine.
 - **LA 2018:** converted as in UA-MT (x/y crop around the atrium, z-score), with seeded crop margins.
 
@@ -127,10 +125,6 @@ No volume is resampled.
 ```bash
 # ACDC
 python scripts/preprocess_acdc.py --raw data/ACDC/database/training --out preprocessed_data/acdc
-
-# M&Ms-1
-python scripts/preprocess_mnms1.py --raw data/MnM1 \
-    --csv "data/MnM1/211230_M&Ms_Dataset_information_diagnosis_opendataset.csv" --out preprocessed_data/mnms1
 
 # LA 2018
 python scripts/preprocess_la2018.py --raw "data/LA2018/Training Set" --out preprocessed_data/la2018
@@ -154,7 +148,6 @@ Running `train.py` again resumes from `runs/<name>/train/last.pt`. Use `--seed 4
 | Config | Dataset / labels |
 |--------|------------------|
 | `configs/acdc_10.json`, `configs/acdc_5.json` | ACDC 10 % / 5 % |
-| `configs/mnms1_10.json`, `configs/mnms1_5.json` | M&Ms-1 10 % / 5 % |
 | `configs/la2018_10.json`, `configs/la2018_5.json` | LA 2018 10 % / 5 % |
 
 ### Evaluation
@@ -191,8 +184,6 @@ Test-set results of the validation-selected checkpoint, seed 42:
 |---------|--------|-------:|----------:|----------:|----------:|-----------:|----------:|
 | ACDC | 10 % | 90.56 | 83.18 | 3.37 | 0.75 | 1.19 | 0.28 |
 | ACDC | 5 % | 87.65 | 78.76 | 5.74 | 1.35 | 1.88 | 0.55 |
-| M&Ms-1 | 10 % | 82.96 | 72.32 | 11.98 | 2.69 | 7.71 | 2.37 |
-| M&Ms-1 | 5 % | 77.63 | 65.70 | 16.20 | 3.93 | 7.40 | 2.23 |
 | LA 2018 | 10 % | 90.91 | 83.68 | 4.59 | 1.23 | 7.34 | 2.34 |
 | LA 2018 | 5 % | 89.08 | 80.85 | 5.20 | 1.43 | 8.33 | 2.63 |
 
@@ -220,14 +211,6 @@ Paired per-patient tests pooled over both seeds (40 pairs):
   removing gross 3D failures on a few patients, so it is not significant.
 
 A1 (step not scaled by spacing, seed 42 only) gives 90.12 Dice and 3.90 mm HD95.
-
-### Width (ACDC 10 %, seed 42)
-
-| Size | Channels | Params | Dice ↑ | HD95 mm ↓ |
-|------|----------|-------:|-------:|----------:|
-| S | 16-32-64-112-128 | 1.20 M | 89.60 | 5.44 |
-| **M** | 24-48-96-160-192 | 2.53 M | **90.56** | **3.37** |
-| L | 40-72-144-240-288 | 5.66 M | 90.40 | 5.25 |
 
 ### Reproducing the ablations
 
